@@ -1,7 +1,4 @@
 # 12-MySQL-Homework
-
-
-# 11-Express-Homework
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 
