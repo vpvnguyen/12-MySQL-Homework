@@ -87,6 +87,18 @@ function userChoice() {
 
 // CLI Application Start
 function init() {
+    console.log('**************************************************************')
+    console.log('*                                                            *')
+    console.log('*                                                            *')
+    console.log('*                                                            *')
+    console.log('*                                                            *')
+    console.log('*                       EMPLOYEE MENU                        *')
+    console.log('*                                                            *')
+    console.log('*                                                            *')
+    console.log('*                                                            *')
+    console.log('*                                                            *')
+    console.log('**************************************************************')
+
     userChoice();
 }
 init();
