@@ -16,7 +16,7 @@ VALUES
     (2001, "Software Engineer", 100000, 1001),
     (2002, "Testing Technician", 80000, 1001), 
     (3001, "Benefits", 80000, 1002),
-    (3002, "General", 75000, 1002),
+    (3002, "Generals", 75000, 1002),
     (4001, "Marketing", 110000, 1003),
     (4002, "Salesperson", 200000, 1003),
     (5001, "Security", 60000, 1004), 
@@ -31,5 +31,5 @@ VALUES
     ("Kalie", "Brwon", 3002, null),
     ("Chad", "Tao", 4001, null),
     ("Nick", "Graffis", 4002, null),
-    ("Allec", "Arzadon" 5001, null),
+    ("Allec", "Arzadon", 5001, null),
     ("Kevin",  "Lazaro", 5002, null);

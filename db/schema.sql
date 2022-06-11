@@ -13,7 +13,7 @@ USE employees_db;
 CREATE TABLE departments (
     department_id INT NOT NULL PRIMARY KEY,
     department_name VARCHAR(30) NOT NULL
-)
+);
 
 -- Create Roles Table
 CREATE TABLE roles (
@@ -23,7 +23,7 @@ CREATE TABLE roles (
     department_id VARCHAR(30) NOT NULL
     -- Add FORIEGN and REFERENCE to Departments Table
     
-)
+);
 
 -- Create Employees Table
 CREATE TABLE employees (
@@ -32,8 +32,8 @@ CREATE TABLE employees (
     last_name VARCHAR(30) NOT NULL,
     role_id INT NOT NULL, 
     -- Add FOREIGN AND REFERNCE to Roles Table
-    manager_id INT NOT NULL
-)
+    manager_id INT
+);
 
 -- 
 
