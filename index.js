@@ -2,7 +2,8 @@
 
 // Import Modules
 const inquirer = require('inquirer');
-const fs = require('fs');
+// const fs = require('fs');
+const mysql = require('mysql2');
 // const Employee = require('./lib/Employee')
 // const Engineer = require('./lib/Engineer')
 // const Manager = require('./lib/Manager')
@@ -14,6 +15,20 @@ const fs = require('fs');
 // Store Employee Information
 const allEmployees = [];
 const allIDs = [];
+
+// Connect to Database
+const db = mysql.createConnection(
+    {
+        // Server Name
+        host: 'localhost',
+        // MySQL Username
+        user: 'root',
+        // MySQL Password
+        password: 'advetech1',
+        // Database Name
+        database: 'employees_db'
+    }
+)
 
 
 // First Question
@@ -45,11 +60,13 @@ function userChoice() {
                 case 'View All Employees':
                     // Dispaly All Employees
                     console.log('View All Employees Picked')
+                    db.query('SELECT * FROM employees', function (err, results) {
+                        console.table(results);
+                    });
                     break;
                 case 'View All Departments':
                     // Display All Deparments
                     console.log('View All Departments Picked')
-
                     break;
                 case 'View All Roles':
                     // Display All Roles
@@ -81,9 +98,6 @@ function userChoice() {
             }
         })
 }
-
-
-
 
 // CLI Application Start
 function init() {
