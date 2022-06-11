@@ -45,6 +45,27 @@ const startOptions = [
     }
 ]
 
+function viewAllEmployees() {
+    db.query('SELECT * FROM employees', function (err, results) {
+        console.table(results);
+    });
+    userChoice();
+}
+
+function viewAllDepartments() {
+    db.query('SELECT * FROM departments', function (err, results) {
+        console.table(results);
+    });
+    userChoice();
+}
+
+function viewAllRoles() {
+    db.query('SELECT * FROM roles', function (err, results) {
+        console.table(results);
+    });
+    userChoice();
+}
+
 // Present User Choices
 function userChoice() {
     inquirer
@@ -53,43 +74,39 @@ function userChoice() {
             switch (data.choice) {
                 case 'View All Employees':
                     // Dispaly All Employees
-                    console.log('View All Employees Picked')
-                    db.query('SELECT * FROM employees', function (err, results) {
-                        console.table(results);
-                    });
-                    return userChoice()
+                    console.log(`You picked: `, data.choice)
+                    return viewAllEmployees();
+
                 case 'View All Departments':
                     // Display All Deparments
-                    console.log('View All Departments Picked')
-                    db.query('SELECT * FROM departments', function (err, results) {
-                        console.table(results);
-                    });
-                    return userChoice();
+                    console.log(`You picked: `, data.choice)
+                    return viewAllDepartments();
+
                 case 'View All Roles':
                     // Display All Roles
-                    console.log('View All Roles Picked')
-                    db.query('SELECT * FROM roles', function (err, results) {
-                        console.table(results);
-                    });
-                    return userChoice();
+                    console.log(`You picked: `, data.choice)
+                    return viewAllRoles();
+
+
                 case 'Add an Employee':
                     // Go to addEmployee
                     console.log('Add an Employee Picked')
-
                     break;
+
                 case 'Add a Department':
                     // Go to addDepartment
                     console.log('Add a Department Picked')
-
                     break;
+
                 case 'Add a Role':
                     // Go to addRole
                     console.log('Add a Role Picked')
-
                     break;
+
                 case 'Update an Employee Role':
                     // Go to updateEmployee
                     console.log('Update an Employee Role Picked')
+
                 default:
                     // Exit
                     console.log('Exiting Application... bye')
