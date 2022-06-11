@@ -19,8 +19,10 @@ CREATE TABLE departments (
 CREATE TABLE roles (
     role_id INT NOT NULL PRIMARY KEY,
     role_title VARCHAR(30) NOT NULL,
-    department_track VARCHAR(30) NOT NULL,
-    -- Add FORIEGN and REFERENCE
+    role_salary INT NOT NULL,
+    department_id VARCHAR(30) NOT NULL
+    -- Add FORIEGN and REFERENCE to Departments Table
+    
 )
 
 -- Create Employees Table
@@ -28,10 +30,9 @@ CREATE TABLE employees (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(30) NOT NULL,
     last_name VARCHAR(30) NOT NULL,
-    title VARCHAR(30) NOT NULL,
-    department VARCHAR(30) NOT NULL, 
-    salary INT NOT NULL, 
-    manager VARCHAR(30) NOT NULL
+    role_id INT NOT NULL, 
+    -- Add FOREIGN AND REFERNCE to Roles Table
+    manager_id INT NOT NULL
 )
 
 -- 
