@@ -2,19 +2,14 @@
 
 // Import Modules
 const inquirer = require('inquirer');
-// const fs = require('fs');
 const mysql = require('mysql2');
-// const Employee = require('./lib/Employee')
-// const Engineer = require('./lib/Engineer')
-// const Manager = require('./lib/Manager')
-// const Intern = require('./lib/intern')
-// const path = require('path');
-// const DIST_DIR = path.resolve(__dirname, 'dist');
-// const distPath = path.join(DIST_DIR, 'index.html');
 
 // Store Employee Information
 const allEmployees = [];
 const allIDs = [];
+
+// PORT Info
+const PORT = process.env.PORT || 3001;
 
 // Connect to Database
 const db = mysql.createConnection(
@@ -29,7 +24,6 @@ const db = mysql.createConnection(
         database: 'employees_db'
     }
 )
-
 
 // First Question
 const startOptions = [
@@ -63,16 +57,21 @@ function userChoice() {
                     db.query('SELECT * FROM employees', function (err, results) {
                         console.table(results);
                     });
-                    break;
+                    return userChoice()
                 case 'View All Departments':
                     // Display All Deparments
                     console.log('View All Departments Picked')
-                    break;
+                    db.query('SELECT * FROM departments', function (err, results) {
+                        console.table(results);
+                    });
+                    return userChoice();
                 case 'View All Roles':
                     // Display All Roles
                     console.log('View All Roles Picked')
-
-                    break;
+                    db.query('SELECT * FROM roles', function (err, results) {
+                        console.table(results);
+                    });
+                    return userChoice();
                 case 'Add an Employee':
                     // Go to addEmployee
                     console.log('Add an Employee Picked')
