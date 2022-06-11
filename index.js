@@ -87,6 +87,7 @@ function userChoice() {
 
 // CLI Application Start
 function init() {
+    // Menu Grpahic
     console.log('**************************************************************')
     console.log('*                                                            *')
     console.log('*                                                            *')
@@ -99,6 +100,7 @@ function init() {
     console.log('*                                                            *')
     console.log('**************************************************************')
 
+    // Call function
     userChoice();
 }
 init();

@@ -47,7 +47,7 @@ Build a command-line application from scratch to manage a company's employee dat
     - Department Names
     - Department IDs
 - View All Roles
-    - lay Job Title
+    - Job Title
     - Role ID
     - Department Role Belongs To
     - Salary for Role
