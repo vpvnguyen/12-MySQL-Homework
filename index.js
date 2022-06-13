@@ -25,20 +25,38 @@ const db = mysql.createConnection(
     }
 )
 
+// First Question
+const startOptions = [
+    {
+        type: 'list',
+        message: 'What would you like to do?',
+        name: 'choice',
+        choices: [
+            'View All Employees',
+            'View All Departments',
+            'View All Roles',
+            'Add an Employee',
+            'Add a Department',
+            'Add a Role',
+            'Update an Employee Role',
+            'Exit'
+        ],
+        default: ['Add a new Engineer']
+    }
+]
 
-
-async function viewAllEmployees() {
-    // db.query('SELECT * FROM employees', function (err, results)
-    // return db.promise().query('SELECT * FROM employees')
-    const { allEmployees } = await db.query.promise().query('SELECT * FROM employees')
-    console.log(allEmployees);
-    return allEmployees;
+function viewAllEmployees() {
+    db.query('SELECT * FROM employees', function (err, results) {
+        console.table(results);
+    });
+    userChoice();
 }
 
 function viewAllDepartments() {
     db.query('SELECT * FROM departments', function (err, results) {
         console.table(results);
     });
+    userChoice();
 }
 
 function viewAllRoles() {
@@ -84,65 +102,53 @@ function addEmployee() {
         })
 }
 
+// Present User Choices
+function userChoice() {
+    inquirer
+        .prompt(startOptions)
+        .then((data) => {
+            switch (data.choice) {
+                case 'View All Employees':
+                    // Dispaly All Employees
+                    console.log(`You picked: `, data.choice)
+                    return viewAllEmployees();
 
-// Start Program
-async function startOptions() {
-    const { choices } = await inquirer.prompt([
-        {
-            type: 'list',
-            name: 'choice',
-            choices: [
-                'View All Employees',
-                'View All Departments',
-                'View All Roles',
-                'Add an Employee',
-                'Add a Department',
-                'Add a Role',
-                'Update an Employee Role',
-                'Exit'
-            ],
-            message: 'What would you like to do?',
-        }
-    ])
-    switch (choices) {
-        case 'View All Employees':
-            // Dispaly All Employees
-            console.log(`You picked: `, choices)
-            const allEmployees = await viewAllEmployees();
-            console.table(allEmployees)
-            return startOptions();
+                case 'View All Departments':
+                    // Display All Deparments
+                    console.log(`You picked: `, data.choice)
+                    return viewAllDepartments();
 
-        case 'View All Departments':
-            console.log(`You picked: `, choices)
-            // Display All Deparments
-            return viewAllDepartments();
+                case 'View All Roles':
+                    // Display All Roles
+                    console.log(`You picked: `, data.choice)
+                    return viewAllRoles();
 
-        case 'View All Roles':
-            console.log(`You picked: `, choices)
-            // Display All Roles
-            return viewAllRoles();
+                case 'Add an Employee':
+                    // Go to addEmployee
+                    console.log('Add an Employee Picked')
+                    return addEmployee();
 
-        case 'Add an Employee':
-            // Go to addEmployee
-            console.log('Add an Employee Picked')
-            return addEmployee();
+                case 'Add a Department':
+                    // Go to addDepartment
+                    console.log('Add a Department Picked')
+                    break;
 
-        case 'Add a Department':
-            // Go to addDepartment
-            console.log('Add a Department Picked')
-            break;
+                case 'Add a Role':
+                    // Go to addRole
+                    console.log('Add a Role Picked')
+                    break;
 
-        case 'Add a Role':
-            // Go to addRole
-            console.log('Add a Role Picked')
-            break;
+                case 'Update an Employee Role':
+                    // Go to updateEmployee
+                    console.log('Update an Employee Role Picked')
 
-        case 'Update an Employee Role':
-            // Go to updateEmployee
-            console.log('Update an Employee Role Picked')
-    }
+                default:
+                    // Exit
+                    console.log('Exiting Application... bye')
+                    break;
+            }
+        })
 }
-
 
 // CLI Application Start
 function init() {
@@ -160,6 +166,6 @@ function init() {
     console.log('**************************************************************')
 
     // Call function
-    startOptions();
+    userChoice();
 }
 init();
