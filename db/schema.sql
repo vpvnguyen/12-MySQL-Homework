@@ -35,5 +35,4 @@ CREATE TABLE employees (
     manager_id INT
 );
 
--- 
 
