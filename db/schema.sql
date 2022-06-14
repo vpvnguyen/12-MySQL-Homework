@@ -17,7 +17,7 @@ CREATE TABLE departments (
 
 -- Create Roles Table
 CREATE TABLE roles (
-    role_id INT NOT NULL PRIMARY KEY,
+    role_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     role_title VARCHAR(30) NOT NULL,
     role_salary INT NOT NULL,
     department_id VARCHAR(30) NOT NULL

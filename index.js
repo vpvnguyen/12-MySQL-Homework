@@ -148,6 +148,48 @@ function addDepartment() {
         )
 }
 
+// Add a Role
+function addRole() {
+    // Show current Departments
+    db.promise().query(`SELECT * FROM departments`)
+        .then((depart) => {
+            const departmentChoices = depart[0].map(dep => {
+                return {
+                    name: dep.department_name,
+                    value: dep.department_id
+                }
+            })
+
+            const addRoleQuestions = [
+                {
+                    name: "role_title",
+                    message: "Enter role title",
+                },
+                {
+                    name: "role_salary",
+                    message: "Enter role salary",
+                },
+                {
+                    name: "department_id",
+                    message: "Enter role department",
+                    type: "list",
+                    choices: departmentChoices
+                }
+            ]
+            inquirer.prompt(addRoleQuestions)
+                .then(results => {
+                    // Add results to Role Table
+                    db.promise().query('INSERT INTO roles SET ?', results)
+                        .then(() => {
+                            console.log('Role Added');
+                            userChoice()
+                        })
+                })
+        })
+}
+
+
+
 // Present User Choices
 function userChoice() {
     inquirer
@@ -180,8 +222,7 @@ function userChoice() {
 
                 case 'Add a Role':
                     // Go to addRole
-                    console.log('Add a Role Picked')
-                    break;
+                    return addRole();
 
                 case 'Update an Employee Role':
                     // Go to updateEmployee
