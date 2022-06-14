@@ -188,6 +188,58 @@ function addRole() {
         })
 }
 
+// Update Employee Information
+function updateEmployee() {
+    // Show All Employees
+    db.promise().query(`SELECT * FROM employees`)
+        .then((results) => {
+            const employeeChoices = results[0].map(emp => {
+                return {
+                    name: `${emp.first_name} ${emp.last_name}`,
+                    value: emp.id
+                }
+            })
+            // Show current Roles
+            db.promise().query(`SELECT * FROM roles`)
+                .then((roles) => {
+                    const roleChoices = roles[0].map(role => {
+                        return {
+                            name: role.role_title,
+                            value: role.role_id
+                        }
+                    })
+
+                    const updateEmployeeQuestions = [
+                        {
+                            name: "employee_id",
+                            message: "Which employee would you like to update?",
+                            type: "list",
+                            choices: employeeChoices
+                        },
+                        {
+                            name: "role_id",
+                            message: "What is the employee's new title?",
+                            type: "list",
+                            choices: roleChoices
+                        }
+                    ]
+                    inquirer.prompt(updateEmployeeQuestions)
+                        .then(results => {
+                            // Update Employee Table
+                            db.promise().query('UPDATE employees SET ? WHERE ?', [results, { id: results.employee_id }])
+                                .then(() => {
+                                    console.log('Employee Updated');
+                                    userChoice()
+                                })
+                        })
+                })
+        })
+}
+
+
+
+
+
 
 
 // Present User Choices
@@ -226,7 +278,7 @@ function userChoice() {
 
                 case 'Update an Employee Role':
                     // Go to updateEmployee
-                    console.log('Update an Employee Role Picked')
+                    return updateEmployee();
 
                 default:
                     // Exit
