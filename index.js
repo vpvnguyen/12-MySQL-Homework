@@ -111,7 +111,7 @@ function addEmployee() {
                             name: "manager_id",
                             message: "Who's is their manager?",
                             type: "list",
-                            choices: managerChoices
+                            choices: [...managerChoices, { name: 'No Manager', value: null }],
 
                         }
                     ]
@@ -121,7 +121,7 @@ function addEmployee() {
 
                             // Add results to Employee Table
                             db.promise().query('INSERT INTO employees SET ?', results)
-                                .then(() => setTimeout(userChoice(), 3000))
+                                .then(() => userChoice())
                         })
                 })
         })
