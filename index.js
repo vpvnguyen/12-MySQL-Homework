@@ -121,10 +121,31 @@ function addEmployee() {
 
                             // Add results to Employee Table
                             db.promise().query('INSERT INTO employees SET ?', results)
-                                .then(() => userChoice())
+                                .then(() =>
+                                    userChoice())
                         })
                 })
         })
+}
+
+// Add Department
+function addDepartment() {
+    const addDepartmentQuestions = [
+        {
+            name: "department_name",
+            message: "Enter department name",
+        }
+    ]
+    inquirer.prompt(addDepartmentQuestions)
+        .then(results => {
+            // Add results to Department Table
+            db.promise().query('INSERT INTO departments SET ?', results)
+                .then(() => {
+                    console.log('Department Added');
+                    userChoice()
+                })
+        }
+        )
 }
 
 // Present User Choices
@@ -155,8 +176,7 @@ function userChoice() {
 
                 case 'Add a Department':
                     // Go to addDepartment
-                    console.log('Add a Department Picked')
-                    break;
+                    return addDepartment();
 
                 case 'Add a Role':
                     // Go to addRole

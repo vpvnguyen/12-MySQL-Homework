@@ -3,28 +3,28 @@
 USE employees_db;
 
 -- Insert TD to Departments Table
-INSERT INTO departments (department_id, department_name)
+INSERT INTO departments (department_name)
 VALUES 
-    (1001, "Engineering"), 
-    (1002, "Human Resources"),
-    (1003, "Sales"),
-    (1004, "Facilities");
+    ("Engineering"), 
+    ("Human Resources"),
+    ("Sales"),
+    ("Facilities");
 
 -- Insert TD to Roles Table
 INSERT INTO roles (role_id, role_title, role_salary, department_id)
 VALUES 
-    (2000, "Development Manager", 200000, 1001),
-    (2001, "Software Engineer", 100000, 1001),
-    (2002, "Testing Technician", 80000, 1001), 
-    (3000, "HR Manager", 180000, 1002),
-    (3001, "Benefits", 80000, 1002),
-    (3002, "Generals", 75000, 1002),
-    (4000, "Marketing Manager", 110000, 1003),
-    (4001, "Marketing", 220000, 1003),
-    (4002, "Salesperson", 200000, 1003),
-    (5000, "Facilities Manager", 150000, 1003),
-    (5001, "Security", 60000, 1004), 
-    (5002, "Sanitation Engineer", 62000, 1004);
+    (2000, "Development Manager", 200000, 1),
+    (2001, "Software Engineer", 100000, 1),
+    (2002, "Testing Technician", 80000, 1), 
+    (3000, "HR Manager", 180000, 2),
+    (3001, "Benefits", 80000, 2),
+    (3002, "Generals", 75000, 2),
+    (4000, "Marketing Manager", 110000, 3),
+    (4001, "Marketing", 220000, 3),
+    (4002, "Salesperson", 200000, 3),
+    (5000, "Facilities Manager", 150000, 3),
+    (5001, "Security", 60000, 4), 
+    (5002, "Sanitation Engineer", 62000, 4);
 
 -- Insert TD to Employees Table
 INSERT INTO employees (first_name, last_name, role_id, manager_id)

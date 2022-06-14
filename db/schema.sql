@@ -11,7 +11,7 @@ USE employees_db;
 
 -- Create Departments Table
 CREATE TABLE departments (
-    department_id INT NOT NULL PRIMARY KEY,
+    department_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     department_name VARCHAR(30) NOT NULL
 );
 
