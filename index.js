@@ -67,39 +67,63 @@ function viewAllRoles() {
 }
 
 function addEmployee() {
-    // Show current Roles
-    db.promise().query(`SELECT role_id, role_title FROM roles`)
-        .then(results => {
-            // console.log(results[0]);
-            const choices = results[0].map(role => {
+    // Show Possible Managers
+    db.promise().query(`SELECT id, first_name, last_name FROM employees`)
+        .then((manager) => {
+            console.log('This is the manager choices -----', manager[0]);
+            // console.log(manager[0]);
+
+            const managerChoices = manager[0].map(man => {
                 return {
-                    Title: role.role_title,
-                    "Title ID": role.role_id
+                    name: `${man.first_name} ${man.last_name}`,
+                    value: man.id
                 }
             })
-            console.table(choices)
-            //     // Ask employee info
-            //     const addEmployeeQuestions = [
-            //         {
-            //             name: "first_name",
-            //             message: "Enter employee's first name",
-            //         },
-            //         {
-            //             name: "last_name",
-            //             message: "Enter employee's last name",
-            //         },
-            //         {
-            //             name: "role_id",
-            //             message: "What is the employee's title?",
-            //             type: "list",
-            //             choices
-            //         },
-            //     ]
-            //     inquirer.prompt(addEmployeeQuestions)
-            //         .then(results => {
-            //             console.log(`RESULTS -----`, results)
-            //         })
+            // Show current Roles
+            db.promise().query(`SELECT role_id, role_title FROM roles`)
+                .then((results) => {
+                    // console.log(results[0]);
+                    const choices = results[0].map(role => {
+                        return {
+                            name: role.role_title,
+                            value: role.role_id
+                        }
+                    })
+                    console.table(managerChoices)
+                    // console.table(choices)
+                    // Ask employee info
+                    const addEmployeeQuestions = [
+                        {
+                            name: "first_name",
+                            message: "Enter employee's first name",
+                        },
+                        {
+                            name: "last_name",
+                            message: "Enter employee's last name",
+                        },
+                        {
+                            name: "role_id",
+                            message: "What is the employee's title?",
+                            type: "list",
+                            choices
+                        },
+                        {
+                            name: "manager_id",
+                            message: "Who's is their manager?",
+                            type: "list",
+                            choices: managerChoices
 
+                        }
+                    ]
+                    inquirer.prompt(addEmployeeQuestions)
+                        .then(results => {
+                            console.log(`RESULTS -----`, results)
+
+                            // Add results to Employee Table
+                            db.promise().query('INSERT INTO employees SET ?', results)
+                                .then(() => setTimeout(userChoice(), 3000))
+                        })
+                })
         })
 }
 
