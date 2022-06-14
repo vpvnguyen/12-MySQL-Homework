@@ -231,7 +231,7 @@ function userChoice() {
                 default:
                     // Exit
                     console.log('Exiting Application... bye')
-                    break;
+                    process.exit(1);
             }
         })
 }
