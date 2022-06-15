@@ -3,27 +3,12 @@
 // Import Modules
 const inquirer = require('inquirer');
 const mysql = require('mysql2');
+const db = require('./config/connection')
 
 // Store Employee Information
 const allEmployees = [];
 const allIDs = [];
 
-// PORT Info
-const PORT = process.env.PORT || 3001;
-
-// Connect to Database
-const db = mysql.createConnection(
-    {
-        // Server Name
-        host: 'localhost',
-        // MySQL Username
-        user: 'root',
-        // MySQL Password
-        password: 'advetech1',
-        // Database Name
-        database: 'employees_db'
-    }
-)
 
 // First Question
 const startOptions = [
@@ -294,11 +279,7 @@ function init() {
     console.log('**************************************************************')
     console.log('*                                                            *')
     console.log('*                                                            *')
-    console.log('*                                                            *')
-    console.log('*                                                            *')
     console.log('*                       EMPLOYEE MENU                        *')
-    console.log('*                                                            *')
-    console.log('*                                                            *')
     console.log('*                                                            *')
     console.log('*                                                            *')
     console.log('**************************************************************')
