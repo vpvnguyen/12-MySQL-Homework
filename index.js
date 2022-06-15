@@ -6,17 +6,14 @@ const mysql = require('mysql2');
 const db = require('./config/connection')
 const viewAllDepartments = require('./scripts/viewAllDepartments')
 const viewAllEmployees = require('./scripts/viewAllEmployees')
+const viewAllRoles = require('./scripts/viewAllRoles')
 
 
 
 
 
-function viewAllRoles() {
-    db.query('SELECT * FROM roles', function (err, results) {
-        console.table(results);
-    });
-    userChoice();
-}
+
+
 
 function addEmployee() {
     // Show Possible Managers
@@ -243,6 +240,13 @@ async function userChoice() {
             const allDepartments = await viewAllDepartments();
             console.table(allDepartments[0]);
             return userChoice();
+
+            case 'View All Roles':
+                // Display All Roles
+                console.log(`You picked: `, choice)
+                const allRoles = await viewAllRoles();
+                console.table(allRoles[0]);
+                return userChoice();
     }
 }
 

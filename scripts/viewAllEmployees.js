@@ -1,12 +1,5 @@
+// Import Modules
 const db = require('../config/connection');
-
-// Original
-// function viewAllEmployees() {
-//     db.query('SELECT * FROM employees', function (err, results) {
-//         console.table(results);
-//     });
-//     userChoice();
-// }
 
 // Refactored for ASYNC AWAIT
 async function viewAllEmployees() {
@@ -16,3 +9,12 @@ async function viewAllEmployees() {
 
 // Export
 module.exports = viewAllEmployees;
+
+
+// Original
+// function viewAllEmployees() {
+//     db.query('SELECT * FROM employees', function (err, results) {
+//         console.table(results);
+//     });
+//     userChoice();
+// }
