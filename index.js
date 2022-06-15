@@ -211,7 +211,7 @@ function updateEmployee() {
 
                     const updateEmployeeQuestions = [
                         {
-                            name: "employee_id",
+                            name: "id",
                             message: "Which employee would you like to update?",
                             type: "list",
                             choices: employeeChoices
@@ -226,7 +226,7 @@ function updateEmployee() {
                     inquirer.prompt(updateEmployeeQuestions)
                         .then(results => {
                             // Update Employee Table
-                            db.promise().query('UPDATE employees SET ? WHERE ?', [results, { id: results.employee_id }])
+                            db.promise().query('UPDATE employees SET ? WHERE ?', [results, { id: results.id }])
                                 .then(() => {
                                     console.log('Employee Updated');
                                     userChoice()
