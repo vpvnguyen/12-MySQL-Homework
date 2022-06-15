@@ -5,11 +5,6 @@ const inquirer = require('inquirer');
 const mysql = require('mysql2');
 const db = require('./config/connection')
 
-// Store Employee Information
-const allEmployees = [];
-const allIDs = [];
-
-
 // First Question
 const startOptions = [
     {
