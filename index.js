@@ -4,36 +4,12 @@
 const inquirer = require('inquirer');
 const mysql = require('mysql2');
 const db = require('./config/connection')
+const viewAllDepartments = require('./scripts/viewAllDepartments')
 
-// First Question
-const startOptions = [
-    {
-        type: 'list',
-        message: 'What would you like to do?',
-        name: 'choice',
-        choices: [
-            'View All Employees',
-            'View All Departments',
-            'View All Roles',
-            'Add an Employee',
-            'Add a Department',
-            'Add a Role',
-            'Update an Employee Role',
-            'Exit'
-        ],
-        default: ['Add a new Engineer']
-    }
-]
+
 
 function viewAllEmployees() {
     db.query('SELECT * FROM employees', function (err, results) {
-        console.table(results);
-    });
-    userChoice();
-}
-
-function viewAllDepartments() {
-    db.query('SELECT * FROM departments', function (err, results) {
         console.table(results);
     });
     userChoice();
@@ -218,55 +194,101 @@ function updateEmployee() {
 
 
 
+// // First Question
+// const startOptions = [
+//     {
+//         type: 'list',
+//         message: 'What would you like to do?',
+//         name: 'choice',
+//         choices: [
+//             'View All Employees',
+//             'View All Departments',
+//             'View All Roles',
+//             'Add an Employee',
+//             'Add a Department',
+//             'Add a Role',
+//             'Update an Employee Role',
+//             'Exit'
+//         ],
+//         default: ['Add a new Engineer']
+//     }
+// ]
 
-
-
-
-// Present User Choices
-function userChoice() {
-    inquirer
-        .prompt(startOptions)
-        .then((data) => {
-            switch (data.choice) {
-                case 'View All Employees':
-                    // Dispaly All Employees
-                    console.log(`You picked: `, data.choice)
-                    return viewAllEmployees();
-
-                case 'View All Departments':
-                    // Display All Deparments
-                    console.log(`You picked: `, data.choice)
-                    return viewAllDepartments();
-
-                case 'View All Roles':
-                    // Display All Roles
-                    console.log(`You picked: `, data.choice)
-                    return viewAllRoles();
-
-                case 'Add an Employee':
-                    // Go to addEmployee
-                    console.log('Add an Employee Picked')
-                    return addEmployee();
-
-                case 'Add a Department':
-                    // Go to addDepartment
-                    return addDepartment();
-
-                case 'Add a Role':
-                    // Go to addRole
-                    return addRole();
-
-                case 'Update an Employee Role':
-                    // Go to updateEmployee
-                    return updateEmployee();
-
-                default:
-                    // Exit
-                    console.log('Exiting Application... bye')
-                    process.exit(1);
-            }
-        })
+// Refactor to async / await
+async function userChoice() {
+    const { choice } = await inquirer.prompt([
+        {
+            type: 'list',
+            name: 'choice',
+            choices: [
+                'View All Employees',
+                'View All Departments',
+                'View All Roles',
+                'Add an Employee',
+                'Add a Department',
+                'Add a Role',
+                'Update an Employee Role',
+                'Exit'
+            ],
+            message: 'What would you like to do?',
+        }
+    ])
+    switch (choice) {
+        case 'View All Departments':
+            // Display All Deparments
+            console.log(`You picked: `, choice)
+            const allDepartments = await viewAllDepartments();
+            console.table(allDepartments[0]);
+            return userChoice();
+    }
 }
+
+// Original
+// Present User Choices
+// function userChoice() {
+//     inquirer
+//         .prompt(startOptions)
+//         .then((data) => {
+//             switch (data.choice) {
+//                 case 'View All Employees':
+//                     // Dispaly All Employees
+//                     console.log(`You picked: `, data.choice)
+//                     return viewAllEmployees();
+
+//                 case 'View All Departments':
+//                     // Display All Deparments
+//                     console.log(`You picked: `, data.choice)
+//                     return viewAllDepartments();
+
+//                 case 'View All Roles':
+//                     // Display All Roles
+//                     console.log(`You picked: `, data.choice)
+//                     return viewAllRoles();
+
+//                 case 'Add an Employee':
+//                     // Go to addEmployee
+//                     console.log('Add an Employee Picked')
+//                     return addEmployee();
+
+//                 case 'Add a Department':
+//                     // Go to addDepartment
+//                     return addDepartment();
+
+//                 case 'Add a Role':
+//                     // Go to addRole
+//                     return addRole();
+
+//                 case 'Update an Employee Role':
+//                     // Go to updateEmployee
+//                     return updateEmployee();
+
+//                 default:
+//                     // Exit
+//                     console.log('Exiting Application... bye')
+//                     process.exit(1);
+//             }
+//         })
+// }
 
 // CLI Application Start
 function init() {

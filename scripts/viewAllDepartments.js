@@ -1,4 +1,4 @@
-const db = require("../../config/connection");
+const db = require('../config/connection');
 
 
 // Original
@@ -10,11 +10,17 @@ const db = require("../../config/connection");
 // }
 
 // Refactor
-const viewAllDepartments = () => {
-    db.query('SELECT * FROM departments', function (err, results) {
-        console.table('\n', results);
-    });
-    userChoice();
+// const viewAllDepartments = () => {
+//     db.query('SELECT * FROM departments', function (err, results) {
+//         console.table('\n', results);
+//     });
+//     // userChoice();
+// }
+
+// Refactor for Ayns Await
+async function viewAllDepartments() {
+    const allDepartments = await db.promise().query('SELECT * FROM departments')
+    return allDepartments
 }
 
 // Export
