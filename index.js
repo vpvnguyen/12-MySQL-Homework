@@ -5,15 +5,11 @@ const inquirer = require('inquirer');
 const mysql = require('mysql2');
 const db = require('./config/connection')
 const viewAllDepartments = require('./scripts/viewAllDepartments')
+const viewAllEmployees = require('./scripts/viewAllEmployees')
 
 
 
-function viewAllEmployees() {
-    db.query('SELECT * FROM employees', function (err, results) {
-        console.table(results);
-    });
-    userChoice();
-}
+
 
 function viewAllRoles() {
     db.query('SELECT * FROM roles', function (err, results) {
@@ -234,6 +230,13 @@ async function userChoice() {
         }
     ])
     switch (choice) {
+        case 'View All Employees':
+            // Display All Employees
+            console.log(`You picked: `, choice)
+            const allEmployees = await viewAllEmployees();
+            console.table(allEmployees[0]);
+            return userChoice();
+
         case 'View All Departments':
             // Display All Deparments
             console.log(`You picked: `, choice)

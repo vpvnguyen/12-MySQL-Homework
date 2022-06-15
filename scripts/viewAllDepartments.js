@@ -17,7 +17,8 @@ const db = require('../config/connection');
 //     // userChoice();
 // }
 
-// Refactor for Ayns Await
+// Refactored for ASYNC AWAIT
+
 async function viewAllDepartments() {
     const allDepartments = await db.promise().query('SELECT * FROM departments')
     return allDepartments
