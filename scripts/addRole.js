@@ -17,12 +17,12 @@ async function addRole() {
         {
             type: 'input',
             name: "role_title",
-            message: "Enter Role Title:",
+            message: "Enter Role's Title:",
         },
         {
             type: 'input',
             name: "role_salary",
-            message: "Enter Role Salary:",
+            message: "Enter Role's Salary:",
         },
         {
             type: 'list',

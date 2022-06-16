@@ -8,7 +8,7 @@ async function addDepartment() {
         {
             type: 'input',
             name: "department_name",
-            message: "Enter department name",
+            message: "Enter Department Name:",
         },
     ])
     // Add Department

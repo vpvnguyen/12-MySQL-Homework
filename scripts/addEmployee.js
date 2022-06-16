@@ -24,22 +24,22 @@ async function addEmployee() {
         {
             name: "first_name",
             type: 'input',
-            message: "Enter employee's first name",
+            message: "Enter Employee's First Name:",
         },
         {
             name: "last_name",
-            message: "Enter employee's last name",
+            message: "Enter Employee's Last Name:",
             type: 'input',
         },
         {
             name: "role_id",
-            message: "What is the employee's title?",
+            message: "Select Employee's Title:",
             type: "list",
             choices
         },
         {
             name: "manager_id",
-            message: "Who's is their manager?",
+            message: "Select Employee's Manager:",
             type: "list",
             choices: [...managerChoices, { name: 'No Manager', value: null }],
 
