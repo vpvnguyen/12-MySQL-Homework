@@ -10,55 +10,57 @@ const viewAllRoles = require('./scripts/viewAllRoles')
 const addEmployee = require('./scripts/addEmployee')
 const addDepartment = require('./scripts/addDepartment')
 const addRole = require('./scripts/addRole')
+const updateEmployee = require('./scripts/updateEmployee')
+
 
 
 // Update Employee Information
-function updateEmployee() {
-    // Show All Employees
-    db.promise().query(`SELECT * FROM employees`)
-        .then((results) => {
-            const employeeChoices = results[0].map(emp => {
-                return {
-                    name: `${emp.first_name} ${emp.last_name}`,
-                    value: emp.id
-                }
-            })
-            // Show current Roles
-            db.promise().query(`SELECT * FROM roles`)
-                .then((roles) => {
-                    const roleChoices = roles[0].map(role => {
-                        return {
-                            name: role.role_title,
-                            value: role.role_id
-                        }
-                    })
+// function updateEmployee() {
+//     // List Possible Emplyees
+//     db.promise().query(`SELECT * FROM employees`)
+//         .then((results) => {
+//             const employeeChoices = results[0].map(emp => {
+//                 return {
+//                     name: `${emp.first_name} ${emp.last_name}`,
+//                     value: emp.id
+//                 }
+//             })
+//             // Show current Roles
+//             db.promise().query(`SELECT * FROM roles`)
+//                 .then((roles) => {
+//                     const roleChoices = roles[0].map(role => {
+//                         return {
+//                             name: role.role_title,
+//                             value: role.role_id
+//                         }
+//                     })
 
-                    const updateEmployeeQuestions = [
-                        {
-                            name: "id",
-                            message: "Which employee would you like to update?",
-                            type: "list",
-                            choices: employeeChoices
-                        },
-                        {
-                            name: "role_id",
-                            message: "What is the employee's new title?",
-                            type: "list",
-                            choices: roleChoices
-                        }
-                    ]
-                    inquirer.prompt(updateEmployeeQuestions)
-                        .then(results => {
-                            // Update Employee Table
-                            db.promise().query('UPDATE employees SET ? WHERE ?', [results, { id: results.id }])
-                                .then(() => {
-                                    console.log('Employee Updated');
-                                    userChoice()
-                                })
-                        })
-                })
-        })
-}
+//                     const updateEmployeeQuestions = [
+//                         {
+//                             name: "id",
+//                             message: "Which employee would you like to update?",
+//                             type: "list",
+//                             choices: employeeChoices
+//                         },
+//                         {
+//                             name: "role_id",
+//                             message: "What is the employee's new title?",
+//                             type: "list",
+//                             choices: roleChoices
+//                         }
+//                     ]
+//                     inquirer.prompt(updateEmployeeQuestions)
+//                         .then(results => {
+//                             // Update Employee Table
+//                             db.promise().query('UPDATE employees SET ? WHERE ?', [results, { id: results.id }])
+//                                 .then(() => {
+//                                     console.log('Employee Updated');
+//                                     userChoice()
+//                                 })
+//                         })
+//                 })
+//         })
+// }
 
 // Refactor to async / await
 async function userChoice() {
@@ -73,7 +75,7 @@ async function userChoice() {
                 'Add an Employee',
                 'Add a Department',
                 'Add a Role',
-                'Update an Employee Role',
+                `Update an Employee's Role`,
                 'Exit'
             ],
             message: 'What would you like to do?',
@@ -114,6 +116,12 @@ async function userChoice() {
             console.log(`You picked: `, choice)
             const role = await addRole();
             console.log(role);
+            return userChoice();
+
+        case `Update an Employee's Role`:
+            console.log(`You picked: `, choice)
+            const update = await updateEmployee();
+            console.log(update);
             return userChoice();
     }
 }
