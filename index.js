@@ -7,75 +7,9 @@ const db = require('./config/connection')
 const viewAllDepartments = require('./scripts/viewAllDepartments')
 const viewAllEmployees = require('./scripts/viewAllEmployees')
 const viewAllRoles = require('./scripts/viewAllRoles')
+const addEmployee = require('./scripts/addEmployee')
 
 
-
-
-
-
-
-
-function addEmployee() {
-    // Show Possible Managers
-    db.promise().query(`SELECT id, first_name, last_name FROM employees`)
-        .then((manager) => {
-            console.log('This is the manager choices -----', manager[0]);
-            // console.log(manager[0]);
-
-            const managerChoices = manager[0].map(man => {
-                return {
-                    name: `${man.first_name} ${man.last_name}`,
-                    value: man.id
-                }
-            })
-            // Show current Roles
-            db.promise().query(`SELECT role_id, role_title FROM roles`)
-                .then((results) => {
-                    // console.log(results[0]);
-                    const choices = results[0].map(role => {
-                        return {
-                            name: role.role_title,
-                            value: role.role_id
-                        }
-                    })
-                    console.table(managerChoices)
-                    // console.table(choices)
-                    // Ask employee info
-                    const addEmployeeQuestions = [
-                        {
-                            name: "first_name",
-                            message: "Enter employee's first name",
-                        },
-                        {
-                            name: "last_name",
-                            message: "Enter employee's last name",
-                        },
-                        {
-                            name: "role_id",
-                            message: "What is the employee's title?",
-                            type: "list",
-                            choices
-                        },
-                        {
-                            name: "manager_id",
-                            message: "Who's is their manager?",
-                            type: "list",
-                            choices: [...managerChoices, { name: 'No Manager', value: null }],
-
-                        }
-                    ]
-                    inquirer.prompt(addEmployeeQuestions)
-                        .then(results => {
-                            console.log(`RESULTS -----`, results)
-
-                            // Add results to Employee Table
-                            db.promise().query('INSERT INTO employees SET ?', results)
-                                .then(() =>
-                                    userChoice())
-                        })
-                })
-        })
-}
 
 // Add Department
 function addDepartment() {
@@ -241,12 +175,19 @@ async function userChoice() {
             console.table(allDepartments[0]);
             return userChoice();
 
-            case 'View All Roles':
-                // Display All Roles
-                console.log(`You picked: `, choice)
-                const allRoles = await viewAllRoles();
-                console.table(allRoles[0]);
-                return userChoice();
+        case 'View All Roles':
+            // Display All Roles
+            console.log(`You picked: `, choice)
+            const allRoles = await viewAllRoles();
+            console.table(allRoles[0]);
+            return userChoice();
+
+        case 'Add an Employee':
+            // Display All Roles
+            console.log(`You picked: `, choice)
+            const employee = await addEmployee();
+            console.table(employee);
+            return userChoice();
     }
 }
 
