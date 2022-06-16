@@ -8,28 +8,8 @@ const viewAllDepartments = require('./scripts/viewAllDepartments')
 const viewAllEmployees = require('./scripts/viewAllEmployees')
 const viewAllRoles = require('./scripts/viewAllRoles')
 const addEmployee = require('./scripts/addEmployee')
+const addDepartment = require('./scripts/addDepartment')
 
-
-
-// Add Department
-function addDepartment() {
-    const addDepartmentQuestions = [
-        {
-            name: "department_name",
-            message: "Enter department name",
-        }
-    ]
-    inquirer.prompt(addDepartmentQuestions)
-        .then(results => {
-            // Add results to Department Table
-            db.promise().query('INSERT INTO departments SET ?', results)
-                .then(() => {
-                    console.log('Department Added');
-                    userChoice()
-                })
-        }
-        )
-}
 
 // Add a Role
 function addRole() {
@@ -162,31 +142,33 @@ async function userChoice() {
     ])
     switch (choice) {
         case 'View All Employees':
-            // Display All Employees
             console.log(`You picked: `, choice)
             const allEmployees = await viewAllEmployees();
             console.table(allEmployees[0]);
             return userChoice();
 
         case 'View All Departments':
-            // Display All Deparments
             console.log(`You picked: `, choice)
             const allDepartments = await viewAllDepartments();
             console.table(allDepartments[0]);
             return userChoice();
 
         case 'View All Roles':
-            // Display All Roles
             console.log(`You picked: `, choice)
             const allRoles = await viewAllRoles();
             console.table(allRoles[0]);
             return userChoice();
 
         case 'Add an Employee':
-            // Display All Roles
             console.log(`You picked: `, choice)
             const employee = await addEmployee();
-            console.table(employee);
+            console.log(employee);
+            return userChoice();
+
+        case 'Add a Department':
+            console.log(`You picked: `, choice)
+            const department = await addDepartment();
+            console.log(department);
             return userChoice();
     }
 }

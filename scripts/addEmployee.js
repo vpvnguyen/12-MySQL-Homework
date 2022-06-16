@@ -12,6 +12,7 @@ async function addEmployee() {
             value: man.id
         }
     })
+    // List Possible Roles
     const [roles] = await db.promise().query(`SELECT role_id, role_title FROM roles`)
     const choices = roles.map(role => {
         return {
@@ -19,29 +20,31 @@ async function addEmployee() {
             value: role.role_id
         }
     })
-    const { first_name, last_name, role_id, manager_id } = await inquirer.prompt([{
-        name: "first_name",
-        message: "Enter employee's first name",
-    },
-    {
-        name: "last_name",
-        message: "Enter employee's last name",
-    },
-    {
-        name: "role_id",
-        message: "What is the employee's title?",
-        type: "list",
-        choices
-    },
-    {
-        name: "manager_id",
-        message: "Who's is their manager?",
-        type: "list",
-        choices: [...managerChoices, { name: 'No Manager', value: null }],
+    const { first_name, last_name, role_id, manager_id } = await inquirer.prompt([
+        {
+            name: "first_name",
+            type: 'input',
+            message: "Enter employee's first name",
+        },
+        {
+            name: "last_name",
+            message: "Enter employee's last name",
+            type: 'input',
+        },
+        {
+            name: "role_id",
+            message: "What is the employee's title?",
+            type: "list",
+            choices
+        },
+        {
+            name: "manager_id",
+            message: "Who's is their manager?",
+            type: "list",
+            choices: [...managerChoices, { name: 'No Manager', value: null }],
 
-    }
-    ]
-    )
+        }
+    ])
     // Add Employee
     await db.promise().query(`INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)`, [first_name, last_name, role_id, manager_id])
     return `${first_name} ${last_name} has been added to the database`
