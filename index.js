@@ -123,6 +123,12 @@ async function userChoice() {
             const update = await updateEmployee();
             console.log(update);
             return userChoice();
+
+        default:
+            // Exit
+            console.log('Exiting Application... bye')
+            process.exit(1);
+
     }
 }
 

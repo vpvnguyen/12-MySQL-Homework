@@ -4,7 +4,7 @@ const inquirer = require('inquirer');
 
 // Refactored for ASYNC AWAIT
 async function updateEmployee() {
-    // List Possible Emplyees
+    // List Possible Empolyees
     const [employee] = await db.promise().query("SELECT id, first_name, last_name FROM employees")
     const employeeChoices = employee.map(emp => {
         return {
