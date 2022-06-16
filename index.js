@@ -9,47 +9,8 @@ const viewAllEmployees = require('./scripts/viewAllEmployees')
 const viewAllRoles = require('./scripts/viewAllRoles')
 const addEmployee = require('./scripts/addEmployee')
 const addDepartment = require('./scripts/addDepartment')
+const addRole = require('./scripts/addRole')
 
-
-// Add a Role
-function addRole() {
-    // Show current Departments
-    db.promise().query(`SELECT * FROM departments`)
-        .then((depart) => {
-            const departmentChoices = depart[0].map(dep => {
-                return {
-                    name: dep.department_name,
-                    value: dep.department_id
-                }
-            })
-
-            const addRoleQuestions = [
-                {
-                    name: "role_title",
-                    message: "Enter role title",
-                },
-                {
-                    name: "role_salary",
-                    message: "Enter role salary",
-                },
-                {
-                    name: "department_id",
-                    message: "Enter role department",
-                    type: "list",
-                    choices: departmentChoices
-                }
-            ]
-            inquirer.prompt(addRoleQuestions)
-                .then(results => {
-                    // Add results to Role Table
-                    db.promise().query('INSERT INTO roles SET ?', results)
-                        .then(() => {
-                            console.log('Role Added');
-                            userChoice()
-                        })
-                })
-        })
-}
 
 // Update Employee Information
 function updateEmployee() {
@@ -98,28 +59,6 @@ function updateEmployee() {
                 })
         })
 }
-
-
-
-// // First Question
-// const startOptions = [
-//     {
-//         type: 'list',
-//         message: 'What would you like to do?',
-//         name: 'choice',
-//         choices: [
-//             'View All Employees',
-//             'View All Departments',
-//             'View All Roles',
-//             'Add an Employee',
-//             'Add a Department',
-//             'Add a Role',
-//             'Update an Employee Role',
-//             'Exit'
-//         ],
-//         default: ['Add a new Engineer']
-//     }
-// ]
 
 // Refactor to async / await
 async function userChoice() {
@@ -170,8 +109,40 @@ async function userChoice() {
             const department = await addDepartment();
             console.log(department);
             return userChoice();
+
+        case 'Add a Role':
+            console.log(`You picked: `, choice)
+            const role = await addRole();
+            console.log(role);
+            return userChoice();
     }
 }
+
+
+
+// CLI Application Start
+function init() {
+    // Menu Grpahic
+    console.log('**************************************************************')
+    console.log('*                                                            *')
+    console.log('*                                                            *')
+    console.log('*                       EMPLOYEE MENU                        *')
+    console.log('*                                                            *')
+    console.log('*                                                            *')
+    console.log('**************************************************************')
+
+    // Call function
+    userChoice();
+}
+init();
+
+
+
+
+
+
+
+
 
 // Original
 // Present User Choices
@@ -220,18 +191,25 @@ async function userChoice() {
 //         })
 // }
 
-// CLI Application Start
-function init() {
-    // Menu Grpahic
-    console.log('**************************************************************')
-    console.log('*                                                            *')
-    console.log('*                                                            *')
-    console.log('*                       EMPLOYEE MENU                        *')
-    console.log('*                                                            *')
-    console.log('*                                                            *')
-    console.log('**************************************************************')
 
-    // Call function
-    userChoice();
-}
-init();
+
+
+// // First Question
+// const startOptions = [
+//     {
+//         type: 'list',
+//         message: 'What would you like to do?',
+//         name: 'choice',
+//         choices: [
+//             'View All Employees',
+//             'View All Departments',
+//             'View All Roles',
+//             'Add an Employee',
+//             'Add a Department',
+//             'Add a Role',
+//             'Update an Employee Role',
+//             'Exit'
+//         ],
+//         default: ['Add a new Engineer']
+//     }
+// ]
