@@ -38,7 +38,7 @@ async function updateEmployee() {
     ])
     // Update Employee
     await db.promise().query(`UPDATE employees SET ? WHERE ?`, [{ role_id }, { id: employee_id }])
-    return `Employee has been updated`
+    return `Employee's Role has been updated...`
 }
 
 //Export
