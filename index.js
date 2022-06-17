@@ -14,6 +14,7 @@ const updateEmployee = require('./scripts/updateEmployee')
 
 // Bonus
 const updateEmpMan = require('./scripts/updateEmpMan')
+const viewByManager = require('./scripts/viewByManager')
 
 
 // Refactor to async / await
@@ -24,6 +25,7 @@ async function userChoice() {
             name: 'choice',
             choices: [
                 'View All Employees',
+                'View Employees By Manager',
                 'View All Departments',
                 'View All Roles',
                 'Add an Employee',
@@ -41,6 +43,12 @@ async function userChoice() {
             console.log(`You picked: `, choice)
             const allEmployees = await viewAllEmployees();
             console.table(allEmployees[0]);
+            return userChoice();
+
+        case 'View Employees By Manager':
+            console.log(`You picked: `, choice)
+            const viewManEmployees = await viewByManager();
+            console.table(viewManEmployees[0]);
             return userChoice();
 
         case 'View All Departments':

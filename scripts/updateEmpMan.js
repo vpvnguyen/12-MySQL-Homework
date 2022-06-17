@@ -4,7 +4,7 @@
 const db = require('../config/connection');
 const inquirer = require('inquirer');
 
-// Refactored for ASYNC AWAIT
+
 // Update Employee's Manager
 async function updateEmpMan() {
     // List Possible Employees
