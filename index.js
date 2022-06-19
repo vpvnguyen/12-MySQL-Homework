@@ -14,7 +14,8 @@ const updateEmployee = require('./scripts/updateEmployee')
 
 // Bonus
 const updateEmpMan = require('./scripts/updateEmpMan')
-const viewByManager = require('./scripts/viewByManager')
+const viewByManager = require('./scripts/viewByManager');
+const delDepartment = require('./scripts/delDepartment');
 
 
 // Refactor to async / await
@@ -33,6 +34,7 @@ async function userChoice() {
                 'Add a Role',
                 `Update an Employee's Role`,
                 `Update an Employee's Manager`,
+                `Delete a Department`,
                 'Exit'
             ],
             message: 'What would you like to do?',
@@ -91,6 +93,12 @@ async function userChoice() {
             console.log(`You picked: `, choice)
             const empMan = await updateEmpMan();
             console.log(empMan);
+            return userChoice();
+
+        case `Delete a Department`:
+            console.log(`You picked: `, choice)
+            const delDep = await delDepartment();
+            console.log(delDep);
             return userChoice();
 
         default:
