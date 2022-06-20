@@ -19,18 +19,37 @@
 Build a command-line application from scratch to manage a company's employee database, using Node.js, Inquirer, and MySQL.
 
 ## Application Preview
-<p align="center">
-    <img alt="" src="">
+<p align="left">
+    <img alt="Team Profile Gen Demo 1" src="./dist/assets/images/EmployeeTrackerDemoGif1.gif">
+</p>
+
+<p align="left">
+    <img alt="Team Profile Gen Demo 2" src="./dist/assets/images/EmployeeTrackerDemoGif2.gif">
 </p>
 
 ## Installation
-- TBD
+- Copy the repository to your system
+- Load schema.sql and seeds.sql
+    - Option 1: Load by mysql command line:
+        - source schema.sql
+        - source seeds.sql
+    - Option 2: Load with MySQL Workbench
+- Create .env file
+    - SET DB_NAME to 'employees_db'
+    - SET DB_USER to YOUR-MYSQL-USERNAME
+    - SET DB_PASSWORD to YOUR-MYSQL-PASSWORD
+- npm install
+- node index.js
 
 ## Usage
-- TBD
+- This application will allow users to view, add, and edit employees, roles, departments, and managers.
 
 ## Links
 -   Github Repository:
+    - https://github.com/brianalegre/12-MySQL-Homework
+-   Video Demo (YouTube):
+    - https://youtu.be/QMs57Ste1Bw
+-   Vide Demo (Github):
     - https://github.com/brianalegre/12-MySQL-Homework
 
 ## Criteria
