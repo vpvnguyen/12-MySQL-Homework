@@ -19,7 +19,7 @@ const viewByDepartment = require('./scripts/viewByDepartment')
 const delDepartment = require('./scripts/delDepartment');
 const delEmployee = require('./scripts/delEmployee');
 const delRole = require('./scripts/delRole');
-
+const viewDepartSalary = require('./scripts/viewDepartSalary')
 
 // Refactor to async / await
 async function userChoice() {
@@ -32,6 +32,7 @@ async function userChoice() {
                 'View Employees By Manager',
                 'View Employees By Department',
                 'View All Departments',
+                'View Department Salary',
                 'View All Roles',
                 'Add an Employee',
                 'Add a Department',
@@ -69,6 +70,12 @@ async function userChoice() {
             console.log(`You picked: `, choice)
             const allDepartments = await viewAllDepartments();
             console.table(allDepartments[0]);
+            return userChoice();
+
+        case 'View Department Salary':
+            console.log(`You picked: `, choice)
+            const departSalary = await viewDepartSalary();
+            console.table(departSalary[0]);
             return userChoice();
 
         case 'View All Roles':

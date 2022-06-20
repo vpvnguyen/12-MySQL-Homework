@@ -20,14 +20,13 @@ async function viewByDepartment() {
             })),
         }
     ]);
-    const filteredEmployees = await db.promise()
-        .query(`SELECT departments.department_name, employees.first_name, employees.last_name, roles.department_id, employees.role_id, roles.role_title
+    const departEmployees = await db.promise().query(`SELECT departments.department_name, employees.first_name, employees.last_name, roles.department_id, employees.role_id, roles.role_title
     FROM ((employees
     INNER JOIN roles ON employees.role_id = roles.role_id)
     INNER JOIN departments ON roles.department_id = departments.department_id) 
     WHERE departments.department_id = ${department_id}`);
 
-    return filteredEmployees;
+    return departEmployees;
 }
 
 
