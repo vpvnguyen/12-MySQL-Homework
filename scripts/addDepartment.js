@@ -2,6 +2,7 @@
 const db = require('../config/connection');
 const inquirer = require('inquirer');
 
+
 // Refactored for ASYNC AWAIT
 async function addDepartment() {
     const { department_name } = await inquirer.prompt([

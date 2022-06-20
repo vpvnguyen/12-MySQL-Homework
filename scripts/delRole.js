@@ -5,6 +5,7 @@ const db = require('../config/connection');
 const inquirer = require('inquirer');
 const viewAllRoles = require('./viewAllRoles');
 
+
 // Delete Role
 async function delRole() {
     const allRoles = await viewAllRoles();
@@ -22,6 +23,7 @@ async function delRole() {
     const delRole = await db.promise().query(`DELETE FROM roles WHERE role_id = ${role_id}`);
     return `Role has been deleted...`;
 }
+
 
 // Export
 module.exports = delRole;

@@ -5,6 +5,7 @@ const db = require('../config/connection');
 const inquirer = require('inquirer');
 const viewAllDepartments = require('./viewAllDepartments');
 
+
 // Delete Department
 async function delDepartment() {
     const allDepartments = await viewAllDepartments();
@@ -22,6 +23,7 @@ async function delDepartment() {
     const delDep = await db.promise().query(`DELETE FROM departments WHERE department_id = ${department_id}`);
     return `Department has been deleted...`;
 }
+
 
 // Export
 module.exports = delDepartment;

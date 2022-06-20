@@ -5,6 +5,7 @@ const db = require('../config/connection');
 const inquirer = require('inquirer');
 const viewAllDepartments = require('./viewAllDepartments');
 
+
 // Get Department IDs
 async function viewDepartSalary() {
     const allDepartments = await viewAllDepartments();
@@ -22,11 +23,9 @@ async function viewDepartSalary() {
 
     // Get Department Total Salary
     const departSalary = await db.promise().query(`SELECT SUM(role_salary) AS total_salary FROM roles WHERE department_id = ${department_id}`);
-    // const departSalary = await db.promise().query(`SELECT department_id, SUM(role_salary) AS total_salary FROM roles`);
-
-
     return departSalary;
 }
+
 
 // Export
 module.exports = viewDepartSalary;

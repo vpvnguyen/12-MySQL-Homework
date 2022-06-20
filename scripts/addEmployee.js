@@ -2,6 +2,7 @@
 const db = require('../config/connection');
 const inquirer = require('inquirer');
 
+
 // Refactored for ASYNC AWAIT
 async function addEmployee() {
     // List Possible Managers
@@ -49,6 +50,7 @@ async function addEmployee() {
     await db.promise().query(`INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)`, [first_name, last_name, role_id, manager_id])
     return `${first_name} ${last_name} has been added to the database`
 }
+
 
 // Export
 module.exports = addEmployee;

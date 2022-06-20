@@ -5,6 +5,7 @@ const db = require('../config/connection');
 const inquirer = require('inquirer');
 const viewAllEmployees = require('./viewAllEmployees');
 
+
 // Delete Employee
 async function delEmployee() {
     const allEmployees = await viewAllEmployees();
@@ -22,6 +23,7 @@ async function delEmployee() {
     const delEmp = await db.promise().query(`DELETE FROM employees WHERE id = ${employee_id}`);
     return `Employee has been deleted...`;
 }
+
 
 // Export
 module.exports = delEmployee;

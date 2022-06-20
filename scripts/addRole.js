@@ -2,6 +2,7 @@
 const db = require('../config/connection');
 const inquirer = require('inquirer');
 
+
 // Refactored for ASYNC AWAIT
 async function addRole() {
     // List Possible Departments
@@ -36,6 +37,7 @@ async function addRole() {
     return `${role_title} has been added to the database`
 
 }
+
 
 //Export
 module.exports = addRole;

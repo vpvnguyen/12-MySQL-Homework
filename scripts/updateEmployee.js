@@ -2,6 +2,7 @@
 const db = require('../config/connection');
 const inquirer = require('inquirer');
 
+
 // Refactored for ASYNC AWAIT
 async function updateEmployee() {
     // List Possible Empolyees
@@ -40,6 +41,7 @@ async function updateEmployee() {
     await db.promise().query(`UPDATE employees SET ? WHERE ?`, [{ role_id }, { id: employee_id }])
     return `Employee's Role has been updated...`
 }
+
 
 //Export
 module.exports = updateEmployee;

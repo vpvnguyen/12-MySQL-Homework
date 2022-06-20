@@ -1,11 +1,13 @@
 // Import Modules
 const db = require('../config/connection');
 
+
 // Refactored for ASYNC AWAIT
 async function viewAllDepartments() {
     const allDepartments = await db.promise().query('SELECT * FROM departments')
     return allDepartments
 }
+
 
 // Export
 module.exports = viewAllDepartments;
