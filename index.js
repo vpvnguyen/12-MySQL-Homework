@@ -15,6 +15,7 @@ const updateEmployee = require('./scripts/updateEmployee')
 // Bonus
 const updateEmpMan = require('./scripts/updateEmpMan')
 const viewByManager = require('./scripts/viewByManager');
+const viewByDepartment = require('./scripts/viewByDepartment')
 const delDepartment = require('./scripts/delDepartment');
 const delEmployee = require('./scripts/delEmployee');
 const delRole = require('./scripts/delRole');
@@ -29,6 +30,7 @@ async function userChoice() {
             choices: [
                 'View All Employees',
                 'View Employees By Manager',
+                'View Employees By Department',
                 'View All Departments',
                 'View All Roles',
                 'Add an Employee',
@@ -55,6 +57,12 @@ async function userChoice() {
             console.log(`You picked: `, choice)
             const viewManEmployees = await viewByManager();
             console.table(viewManEmployees[0]);
+            return userChoice();
+
+        case 'View Employees By Department':
+            console.log(`You picked: `, choice)
+            const viewEmpDepart = await viewByDepartment();
+            console.table(viewEmpDepart[0]);
             return userChoice();
 
         case 'View All Departments':
