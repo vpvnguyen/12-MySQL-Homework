@@ -30,19 +30,19 @@ Build a command-line application from scratch to manage a company's employee dat
 ## Installation
 - Copy the repository to your system
 - Load schema.sql and seeds.sql
-    - Option 1: Load by mysql command line:
+    - Option 1: Load by MySQL command line:
         - source schema.sql
         - source seeds.sql
     - Option 2: Load with MySQL Workbench
 - Create .env file
     - SET DB_NAME to 'employees_db'
-    - SET DB_USER to YOUR-MYSQL-USERNAME
-    - SET DB_PASSWORD to YOUR-MYSQL-PASSWORD
+    - SET DB_USER to 'YOUR-MYSQL-USERNAME'
+    - SET DB_PASSWORD to 'YOUR-MYSQL-PASSWORD'
 - npm install
 - node index.js
 
 ## Usage
-- This application will allow users to view, add, and edit employees, roles, departments, and managers.
+- This application will allow users to view, add, and edit a company's employee database using MySQL queries
 
 ## Links
 -   Github Repository:
@@ -50,53 +50,20 @@ Build a command-line application from scratch to manage a company's employee dat
 -   Video Demo (YouTube):
     - https://youtu.be/QMs57Ste1Bw
 -   Vide Demo (Github):
-    - https://github.com/brianalegre/12-MySQL-Homework
+    - https://github.com/brianalegre/12-MySQL-Homework/blob/main/assets/images/EmployeeTrackerDemo.mp4
 
 ## Criteria
 - CLI Options
-    - View All Departments
-    - View All Roles
-    - View All Employees
-    - Add a Department
-    - Add a Role
-    - Add an Employee
-    - Update an Employee Role
-- View All Departments
-    - Formated Table
-    - Department Names
-    - Department IDs
-- View All Roles
-    - Job Title
-    - Role ID
-    - Department Role Belongs To
-    - Salary for Role
-- View All Employees
-    - Formated Table
-    - Employee ID
-    - First Name
-    - Last Name
-    - Job Title
-    - Department
-    - Salary
-    - Manager
-- Add Department
-    - Propmpt to Enter Department Name
-    - Adds Department to Database
-- Add Role
-    - Prompt to Enter Role Name
-    - Prompt for Salary
-    - Prompt for Deparment Role Belongs To
-    - Adds Role to Database
-- Add Employee
-    - Prompt for First Name
-    - Prompt for Last Name
-    - Prompt for Role
-    - Prompt for Manager
-    - Adds Employee to Database
-- Update Employee
-    - Select an Employee
-    - Select New Role
-    - Information is Updated in the Database
+    - View All Departments, Roles and Employees
+    - Add a Department, Role, and an Employee
+    - Update an Employee's Role
+
+- CLI Bonus Options
+    - Update an Employee's Manager
+    - View Employees by a Manager
+    - View Employees by a Department
+    - Delete a Department, Role, and an Employee
+    - View Total Sum of Salaries in a Department
 
 - Schema
     - Department
@@ -113,13 +80,6 @@ Build a command-line application from scratch to manage a company's employee dat
         - last_name: VARCHAR(30)
         - role_id: INT
         - manager_id: INT (NULL IF NO MANAGER)
-
-- Bonus
-    - Update Employee Manager
-    - View Employee by Manager
-    - View Employees by Department
-    - Delete Departments, Roles, and Employees
-    - View Total Sum of Salaries in a Department
 
 ## Technologies
 - MySQL2
