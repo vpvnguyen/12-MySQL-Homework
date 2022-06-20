@@ -8,6 +8,9 @@ async function viewAllEmployees() {
     return allEmployees;
 }
 
+// employee ids, first names, last names, 
+// job titles, departments, salaries, and managers
+
 
 // Export
 module.exports = viewAllEmployees;
