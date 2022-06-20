@@ -20,11 +20,11 @@ Build a command-line application from scratch to manage a company's employee dat
 
 ## Application Preview
 <p align="left">
-    <img alt="Team Profile Gen Demo 1" src="./dist/assets/images/EmployeeTrackerDemoGif1.gif">
+    <img alt="Team Profile Gen Demo 1" src="./assets/images/EmployeeTrackerDemoGif1.gif">
 </p>
 
 <p align="left">
-    <img alt="Team Profile Gen Demo 2" src="./dist/assets/images/EmployeeTrackerDemoGif2.gif">
+    <img alt="Team Profile Gen Demo 2" src="./assets/images/EmployeeTrackerDemoGif2.gif">
 </p>
 
 ## Installation
