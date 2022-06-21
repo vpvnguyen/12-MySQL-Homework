@@ -20,7 +20,10 @@ async function delDepartment() {
             })),
         }
     ]);
-    const delDep = await db.promise().query(`DELETE FROM departments WHERE department_id = ${department_id}`);
+    // NOTES: You never want to pass in raw values into queries as this opens up for SQL injection attacks.
+    // Learn more: https://www.stackhawk.com/blog/node-js-sql-injection-guide-examples-and-prevention/
+    // const delDep = await db.promise().query(`DELETE FROM departments WHERE department_id = ${department_id}`);
+    const delDep = await db.promise().query(`DELETE FROM departments WHERE department_id = ?`, [department_id]);
     return `Department has been deleted...`;
 }
 
